@@ -13,7 +13,7 @@ html
 
   body
     a (:target _blank)
-      :href https://kotlin-cloud.github.io/kotlin-is-not-like-java/
+      :href https://github.com/kotlin-cloud/kotlin-is-not-like-java
       img#fork-me (:src http://luckymerlin.me/images/fork-me.png)
     #note
       = "Kotlin is NOT Like Java"
