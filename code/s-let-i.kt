@@ -1,0 +1,1 @@
+public inline fun &lt;T, R&gt; T.let(block: (T) -&gt; R): R = block(this)

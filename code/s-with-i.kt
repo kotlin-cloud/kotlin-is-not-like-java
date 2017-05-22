@@ -1,0 +1,1 @@
+public inline fun &lt;T, R&gt; with(receiver: T, block: T.() -&gt; R): R = receiver.block()

@@ -1,0 +1,31 @@
+{
+  "name": "kotlin-is-not-like-kotlin",
+  "version": "0.0.1",
+  "description": "Kotlin is not like Java",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gezimerlin@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "mission": "0.0.7",
+    "shelljs": "^0.3.0"
+  },
+  "dependencies": {
+    "mission": "^0.0.7",
+    "shelljs": "^0.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kotlin-cloud/kotlin-is-not-like-java.git"
+  },
+  "keywords": [
+    "kotlin",
+    "java"
+  ],
+  "bugs": {
+    "url": "https://github.com/kotlin-cloud/kotlin-is-not-like-java/issues"
+  },
+  "homepage": "https://github.com/kotlin-cloud/kotlin-is-not-like-java"
+}

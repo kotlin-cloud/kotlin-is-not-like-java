@@ -1,0 +1,1 @@
+public inline fun &lt;T&gt; T.apply(block: T.() -&gt; Unit): T { block(); return this }

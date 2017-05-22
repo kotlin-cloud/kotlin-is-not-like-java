@@ -1,0 +1,629 @@
+<!DOCTYPE html><html><head><title>Kotlin is not like Java</title><meta charset="utf-8"><link rel="stylesheet" href="css/style.css"><link class="codestyle" rel="stylesheet" href="css/androidstudio.css"><script src="js/highlight.pack.js"></script><script src="js/kotlin.js"></script><script src="js/java.js"></script><script>hljs.configure({languages: []});hljs.initHighlightingOnLoad();</script></head><body><a target="_blank" href="https://kotlin-cloud.github.io/kotlin-is-not-like-java/"><img id="fork-me" src="http://luckymerlin.me/images/fork-me.png"></a><div id="note">Kotlin is NOT Like Java</div><div class="section"><div class="title">BASIC SYNTAX</div><div class="case"><div class="name">Properties</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">public class MyKotlinClass {
+   val a: Int = 1
+   var b: Int = 1
+   val c = 1
+   var d = 1
+       private set
+}
+
+fun example() {
+   val myClass = MyKotlinClass()
+   myClass.b = 2
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">public class MyJavaClass {
+   private final int a = 1;
+   private int b = 1;
+   private final int c = 1;
+   private int d = 1;
+
+   public int getA() { return a; }
+   public int getB() { return b; }
+   public void setB(int b) { this.b = b; }
+   public int getC() { return c; }
+   public int getD() { return d; }
+   private void setD(int d) { this.d = d; }
+}
+
+class ExampleClass {
+   public static void example() {
+      MyJavaClass myClass = new MyJavaClass()
+      myClass.setB(2)
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">String Templates</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
+   val name = "Omar"
+   val surname = "Miatello"
+   val example = "My name is $name $surname"
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyJavaClass {
+   final String getName() {
+       return "Omar";
+   }
+
+   final String getSurname() {
+       return "Miatello";
+   }
+
+   final String getExample() {
+       return String.format("My name is %s %s",
+           getName(), getSurname()); }
+}</code></pre></div></div></div><div class="case"><div class="name">String Templates</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
+   val name = "Omar"
+   val surname = "Miatello"
+   val example = "My name is $name $surname"
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyJavaClass {
+   final String getName() {
+       return "Omar";
+   }
+
+   final String getSurname() {
+       return "Miatello";
+   }
+
+   final String getExample() {
+       return String.format("My name is %s %s",
+           getName(), getSurname()); }
+}</code></pre></div></div></div><div class="case"><div class="name">Get and Set</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun renderItem(item: SomeItem) {
+    visitCount.text = "${item.visitCount}次拜访"
+
+    phone1.visibility = 
+            if(item.cellPhone.isNullOrEmpty()) 
+               View.GONE else View.VISIBLE
+
+    shopName.text = item.name ?: "暂无商户名称"
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">void renderItem() {
+    visitCount.setText(String.format(...), ...)
+         
+    if(item.cellPhone == null ||
+       item.cellPhone.isEmpty()) {
+        phone1.setVisibility(View.GONE)
+    } else {
+	  phone1.setVisibility(View.VISIBLE)
+    }
+
+    shopName.text = 
+        item.name != null ? item.name : "..."
+}</code></pre></div></div></div><div class="case"><div class="name">Data Class</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">data class User(val name: String, val email: String)</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">public class User {
+   private String name;
+   private String email;
+
+   User(String name, String email) {
+       this.name = name;
+       this.email = email;
+   }
+
+   public String getName() {
+       return name;
+   }
+   public void setName(String name) {
+       this.name = name;
+   }
+   public String getEmail() {
+       return email;
+   }
+   public void setEmail(String email) {
+       this.email = email;
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">String Templates</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
+   val name = "Omar"
+   val surname = "Miatello"
+   val example = "My name is $name $surname"
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyJavaClass {
+   final String getName() {
+       return "Omar";
+   }
+
+   final String getSurname() {
+       return "Miatello";
+   }
+
+   final String getExample() {
+       return String.format("My name is %s %s",
+           getName(), getSurname()); }
+}</code></pre></div></div></div></div><div class="section"><div class="title">NULL SAFETY</div><div class="case"><div class="name">Null Safety</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
+   var a: String = "ciao"
+   var b: String = null  // Error at compile time
+   var c: String? = null
+   var d: String? = "ok"
+
+   fun example(e: String, f: String?) {
+       e.length()
+       f.length()        // Error at compile time
+       f?.length()
+
+       if (f != null) {
+           f.length()
+       }
+   }
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">static class MyUtils {
+   void example(String e, String f) {
+       e.length(); // throw NullPointerException?
+       f.length(); // throw NullPointerException?
+
+       if (e != null) {
+           e.length();
+       }
+
+       if (f != null) {
+           e.length();
+       }
+   }
+}</code></pre></div></div></div></div><div class="section"><div class="title">FUNCTION AND LAMBDA</div><div class="case"><div class="name">Functions</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">val a = 1
+val b = 2
+
+val f1 = { a: Int, b: Int -> a + b }
+
+fun f2(a: Int, b: Int): Int {
+   return a + b
+}
+
+fun f2_(a: Int, b: Int): Int = a + b
+
+fun f3(a: Int, b: Int, fn: (Int, Int) -> Int): Int =
+       if (a > b) fn(a, b) else a - b
+
+class MyKotlinClass {
+   fun test() {
+       print(f1(a, b))         // => 3
+       print(f2(a, b))         // => 3
+       print(f3(a, b, f1))     // => -1
+       print(f3(2, 1, ::f2))   // => 3
+   }
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">public class SomeJavaClass {
+
+   static int add(int a, int b) {
+       return a + b;
+   }
+
+   interface Addable {
+       int add(int a, int b);
+   }
+
+   static int add2(int a, int b, Addable addable) {
+       if (a > b) {
+           return addable.add(a, b);
+       } else {
+           return a - b;
+       }
+   }
+
+   void test() {
+       System.out.println(add2(2, 1, new Addable() {
+           @Override
+           public int add(int a, int b) {
+               return a + b;
+           }
+       }));
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">Lambda</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun f3(a: Int, b: Int, fn: (Int, Int) -> Int): Int =
+       if (a > b) fn(a, b) else a - b
+
+fun test() {
+   f3(2, 1) { a1, a2 ->
+       a1 + a2
+   }                               // => 3       
+   f3(2, 1, { a1, a2 -> a1 + a2})  // => 3
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">public class SomeJavaClass {
+
+   interface Addable {
+       int add(int a, int b);
+   }
+
+   static int add2(int a, int b, Addable addable) {
+       if (a > b) {
+           return addable.add(a, b);
+       } else {
+           return a - b;
+       }
+   }
+
+   void test() {
+       System.out.println(add2(2, 1, new Addable() {
+           @Override
+           public int add(int a, int b) {
+               return a + b;
+           }
+       }));
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">SAM Conversion</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyActivity : Activity() {
+
+   fun example() {
+       val view = findViewById(R.id.button)
+       view.setOnClickListener {
+           Log.d("TAG", "Item clicked!")
+       }
+   }
+
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyActivity extends Activity {
+
+   void example() {
+       View view = findViewById(R.id.button);
+       view.setOnClickListener(
+           new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Log.d("TAG", "Item clicked!");
+               }
+           }
+       );
+   }
+
+}</code></pre></div></div></div></div><div class="section"><div class="title">COLLECTIONS</div><div class="case"><div class="name">Using Collections</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun example() {
+   val os = listOf("Android", "iOS", null,
+                   "Windows Phone")
+
+   os.filterNotNull().sortedBy { it.length }
+           .map { it.toUpperCase() }
+           .forEach { print(it) }
+
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyUtils {
+  static void example() {
+    List&lt;String&gt; os = Arrays.asList("Android",
+                   "iOS", null, "Windows Phone");
+    List&lt;String&gt; osNotNull = new ArrayList&lt;&gt;();
+    for (String name : os) {
+      if (name != null) osNotNull.add(name);
+    }
+    Collections.sort(osNotNull, new
+      Comparator&lt;String&gt;() { @Override
+         public int compare(String l, String r) {
+           return l.length() - r.length();
+         }
+    });
+    for (String name : osNotNull) {
+       String value = name.toUpperCase();
+       print(value);
+    }
+}</code></pre></div></div></div></div><div class="section"><div class="title">EXTESIONS</div><div class="case"><div class="name">Extension: String</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun String.isBig(): Boolean {
+   return length() > 10
+}
+
+fun example() {
+   "why?!".isBig()                 // false!
+   "P90, RUSH B, ...".isBig()   // true!
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">// file MyUtils.java
+class MyUtils {
+   static boolean isBig(String str) {
+       return str.length() > 10;
+   }
+}
+
+// file MyJavaClass.java
+class MyJavaClass {
+   void example() {
+       MyUtils.isBig("why?!");
+       MyUtils.isBig("P90, RUSH B, ...");
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">Simple reified Extension</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">inline fun &lt;reified T : Any&gt; Activity.service(): T {
+   return HttpService.getApiService(T::class.java)
+}
+
+fun Activity.toast(str: String) {
+   Toast.makeText(this, str,Toast.LENGTH_SHORT).show()
+}
+
+
+class MyActivity : Activity() {
+	
+   val baiduService = service<Api>()
+
+   fun test() {
+       toast("hahaha")
+   }
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyActivity extends Activity {
+   //leave out 
+   Api baiduService = HttpService.getApiService(Api.class);
+
+   void test() {
+      ToastUtil.showToast(this, "hahaha");
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">Extensions: Permission</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">inline fun Array<String>.asPermissions(activity: Activity, fn: () -> Unit) {
+   checkNotNull(activity)
+   val PERMISSION_REQUEST_CODE = 11111
+   var pred = true
+   if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+       this.filter { ActivityCompat.checkSelfPermission(activity, it) != PackageManager.PERMISSION_GRANTED }
+               .forEach { pred = false }
+   }
+   if (pred) {
+       fn()
+   } else {
+       ActivityCompat.requestPermissions(activity, this, PERMISSION_REQUEST_CODE)
+   }
+}
+
+fun test(activity: Activity) {
+   listOf(Manifest.permission.ACCESS_FINE_LOCATION,
+           Manifest.permission.ACCESS_COARSE_LOCATION,
+           Manifest.permission.READ_PHONE_STATE).asPermissions(activity) {
+       // do things with required permissions
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">Extensions: Make Phone Call</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun Activity.call(phone: String?) {
+   phone?.let {
+       if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) 
+           == PackageManager.PERMISSION_GRANTED) {
+           val callIntent = Intent(Intent.ACTION_DIAL)
+           callIntent.data = Uri.parse("tel:" + it)
+           this.startActivity(callIntent)
+       } else {
+           ActivityCompat.requestPermissions(this,
+                   arrayOf(Manifest.permission.CALL_PHONE),
+                   StaticConfig.RequestCode.REQUEST_PHONE)
+           toast("请确认是否开启拨打电话权限")
+       }
+   }
+   if (phone == null) {
+       toast("没有电话！")
+   }
+}</code></pre></div></div></div></div><div class="section"><div class="title">DELEGATES</div><div class="case"><div class="name">Lazy Delegation 1</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyItem
+
+class MyKotlinClass {
+   val item by lazy { MyItem() }
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">// in Kotlin is synchronized
+class MyJavaClass {
+   class MyItem { }
+
+   MyItem item;
+
+   final MyItem getItem() {
+       if (item == null) {
+           item = new MyItem();
+       }
+       return item;
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">Lazy Delegation 2</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinActivity : Activity() {
+   val textView by lazy { findViewById(R.id.text) as TextView }
+   val res by lazy { resources.getString(R.string.cancel) }
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyJavaActivity extends Activity {
+
+   TextView textView;
+   String res; 
+
+   protected void onCreate(BundlesavedInstanceState) {
+       super.onCreate(savedInstanceState);
+       textView = (TextView) findViewById(R.id.text);
+       res = getResources().getString(R.id.cancel)
+   }
+}</code></pre></div></div></div><div class="case"><div class="name">Butterknife</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">//usage
+class MyActivity : Activity() {
+   val someText by bindView&lt;TextView&gt;(R.id.text)
+}
+
+//implementation
+private class Lazy&lt;T, V&gt;(private val initializer: (T, KProperty&lt;*&gt;) -&gt; V) : ReadOnlyProperty&lt;T, V&gt; {
+    private object EMPTY
+
+    private var value: Any? = EMPTY
+
+    override fun getValue(thisRef: T, property: KProperty&lt;*&gt;): V {
+        if (value == EMPTY) {
+  value = initializer(thisRef, property)
+        }
+        @Suppress("UNCHECKED_CAST")
+        return value as V
+    }
+}
+
+public fun &lt;V : View&gt; Activity.bindView(id: Int)
+        : ReadOnlyProperty&lt;Activity, V&gt; = required(id, viewFinder)
+
+private val Activity.viewFinder: Activity.(Int) -&gt; View?
+    get() = { findViewById(it) }
+
+private fun &lt;T, V : View&gt; required(id: Int, finder: T.(Int) -&gt; View?)
+        = Lazy { t: T, desc -&gt; t.finder(id) as V? ?: viewNotFound(id, desc) }</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">//usage
+class MyActivity extends Activity {
+   @Bind(R.id.text)
+   TextView someText;
+
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       ButterKnife.bind(this);
+   }
+}
+
+//implementation: 
+//https://github.com/JakeWharton/butterknife
+//tons of code</code></pre></div></div></div><div class="case"><div class="name">Observable</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class User {
+    var name: String by Delegates.observable("<no name>") {
+        prop, old, new ->
+        println("$old -> $new")
+    }
+}
+
+fun example() {
+    val user = User()
+    user.name = "first"     //<no name> -> first
+    user.name = "second"    //first -> second
+}</code></pre></div></div></div><div class="case"><div class="name">Implement willSet and didSet</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">//usage
+var x: Int by varWithObservableSetter(5)
+       .willSet { println("before") }
+       .didSet { println("after") }
+
+var y: String by varWithObservableSetter("abc")
+       .didSet { println("after") }
+
+
+fun test() {
+   x = 10      // before 5     // after 10
+   y = "haha"  //after "haha"
+}
+
+//implementation
+class VarWithObservableSetter&lt;T,
+       out TWillSet : (() -&gt; Unit)?,
+       out TDidSet : (() -&gt; Unit)?&gt;
+internal constructor(
+       val initialValue: T,
+       internal val wilLSet: TWillSet,
+       internal val didSet: TDidSet
+) : ObservableProperty&lt;T&gt;(initialValue) {
+   override fun beforeChange(property: KProperty&lt;*&gt;, oldValue: T, newValue: T): Boolean {
+       wilLSet?.invoke()
+       return true
+   }
+
+   override fun afterChange(property: KProperty&lt;*&gt;, oldValue: T, newValue: T) {
+       didSet?.invoke()
+   }
+}
+
+fun &lt;T&gt; varWithObservableSetter(initialValue: T) =
+       VarWithObservableSetter(initialValue, null, null)
+
+fun &lt;T, R : (() -&gt; Unit)?&gt;
+       VarWithObservableSetter&lt;T, Nothing?, R&gt;.willSet(action: () -&gt; Unit) =
+       VarWithObservableSetter(initialValue, action, didSet)
+
+fun &lt;T, R : (() -&gt; Unit)?&gt;
+       VarWithObservableSetter&lt;T, R, Nothing?&gt;.didSet(action: () -&gt; Unit) =
+       VarWithObservableSetter(initialValue, wilLSet, action)
+
+</code></pre></div></div></div></div><div class="section"><div class="title">SMART CAST AND PATTERN MATCHING</div><div class="case"><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun example1(myView: View) {
+   if (myView is ImageView) {
+       myView.setImageAlpha(10)
+   } else if (myView is TextView) {
+       myView.setText("Ciao")
+   }
+}
+//or
+fun example2(myView: View) {
+   when (myView) {
+       is ImageView -> myView.imageAlpha = 10
+       is TextView -> myView.text = "Ciao"
+   }
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyUtils {
+
+   static void example(View myView) {
+       if (myView instanceof ImageView) {
+           ImageView imageView =
+               (ImageView) myView;
+           imageView.setImageAlpha(10);
+       } else if (myView instanceof TextView) {
+           TextView textView = (TextView) myView;
+           textView.setText("Ciao");
+       }
+   }
+}</code></pre></div></div></div></div><div class="section"><div class="title">STANDARD LIBRARY</div><div class="case"><div class="name">let</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">customer?.let {
+    doSth(it.id)
+}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">if (customer != null) {
+    doSth(customer.id)
+}</code></pre></div></div></div><div class="case"><div class="pair"><div class="kcard"><div class="lang">Source Code</div><pre class="code"><code class="java">public inline fun &lt;T, R&gt; T.let(block: (T) -&gt; R): R = block(this)</code></pre></div></div></div><div class="case"><div class="name">apply</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">File(dir).apply { mkdirs() }</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">File makeDir(String path) {
+   File result = new File(path);
+   result.mkdirs();
+   return result;
+}</code></pre></div></div></div><div class="case"><div class="pair"><div class="kcard"><div class="lang">Source Code</div><pre class="code"><code class="java">public inline fun &lt;T&gt; T.apply(block: T.() -&gt; Unit): T { block(); return this }</code></pre></div></div></div><div class="case"><div class="name">with</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun Activity.toast(str: String) {
+    Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+}
+
+visitList.setOnClickListener {
+    with(context as Activity) {
+        toast("haha")
+    }
+}</code></pre></div></div></div><div class="case"><div class="pair"><div class="kcard"><div class="lang">Source Code</div><pre class="code"><code class="java">public inline fun &lt;T, R&gt; with(receiver: T, block: T.() -&gt; R): R = receiver.block()</code></pre></div></div></div></div><div class="section"><div class="title">DSL</div><div class="case"><div class="name">Bundle</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun bundle(vararg pair: Pair&lt;String, Any&gt;): Bundle {
+    val bundle = Bundle()
+    for ((k, v) in pair) {
+        when (v) {
+           is String -&gt; this.putString(k, v)
+           is Int -&gt; this.putInt(k, v)
+           is Serializable -&gt; this.putSerializable(k, v)
+           is Bundle -&gt; this.putBundle(k, v)
+           is Long -&gt; this.putLong(k, v)
+           ...
+        }
+    }
+    return bundle
+}
+
+inline fun &lt;reified T : Activity&gt; Activity.jump(requestCode: Int, extras: Bundle) =
+       ActivityUtils.jump(this, T::class.java, requestCode, extras)
+
+
+fun example() {
+    jump&lt;MainActivity&gt;(SOME_CODE, bundle("int-key" to 1, "string-key" to 2))
+}</code></pre></div></div></div><div class="case"><div class="name">Converter</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">//usage
+fun testDSL() {
+   convert("ABC") {
+       toLower()    //ABC =&gt; abc
+       toUpper()    //abc =&gt; ABC
+   }
+   convert(2.2) {
+       toLower()    //2.2 =&gt; 2.0
+   }
+   convert(2) {
+       toLower()    //编译器：没有这个方法
+   }
+}
+
+//implementation
+class MConverter&lt;T&gt;(var value: T) {
+   val old = value
+   override fun toString(): String = 
+      	     "[$old] =&gt; [$value]"
+}
+
+fun &lt;T&gt; convert(
+   value: T,
+   init: MConverter&lt;T&gt;.() -&gt; Unit): MConverter&lt;T&gt; {
+   val converter = MConverter(value)
+   converter.init()
+   return converter
+}
+
+fun MConverter&lt;String&gt;.toLower() {
+   value = value.toLowerCase()
+}
+
+fun MConverter&lt;String&gt;.toUpper() {
+   value = value.toUpperCase()
+}
+
+fun MConverter&lt;Double&gt;.toLower() {
+   value = Math.floor(value)
+}</code></pre></div></div></div><div class="case"><div class="name">Retrofit</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">//usage
+someService.someApi(param1, param2).enqueue {
+   onResponse {
+      toast("succeed")
+   }
+   onFailure { toast("failed") }
+   onFinish { hideLoading() }
+}
+
+//implementation
+inline fun &lt;T&gt; Call&lt;T&gt;.enqueue(init: CallbackHelper&lt;T&gt;.() -&gt; Unit) {
+   val listener = CallbackHelper&lt;T&gt;()
+   listener.init()
+   enqueue(listener)
+}
+
+class CallbackHelper&lt;T&gt; : Callback&lt;T&gt; {
+
+   private var _onResponse: ((T) -&gt; Unit)? = null
+   private var _onFailure: ((Throwable) -&gt; Unit)? = null
+   private var _onFinish: (() -&gt; Unit)? = null
+
+   override fun onResponse(call: Call&lt;T&gt;, response: Response&lt;T&gt;) {
+       onResponse?.invoke(response.body())
+       _onFinish?.invoke()
+   }
+
+   fun onResponse(listener: (T) -&gt; Unit) {
+       _onResponse = listener
+   }
+
+   fun onFinish(listener: () -&gt; Unit) {
+       _onFinish = listener
+   } 
+
+   override fun onFailure(call: Call&lt;T&gt;, t: Throwable) {
+       _onFailure?.invoke(t)
+       _onFinish?.invoke()
+   }
+
+   fun onFailure(listener: (Throwable) -&gt; Unit) {
+       _onFailure = listener
+   }
+}</code></pre></div></div></div></div><div class="section"><div class="title">QUIZ</div><div class="case"><div class="name">step 1: solve this quiz. step 2: ???. step 3: profit.</div><div class="pair"><div class="kcard"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class SomeHolder(var x: Int, val action: () -> Unit)
+
+val sadHolder = SomeHolder(1) { print("I want to print x, but i don’t know how.") }
+
+//modify the following line to let the magic happen
+val happyHolder = SomeHolder(1) { print("I know what x is, it's $x")}</code></pre></div></div></div></div></body></html>
