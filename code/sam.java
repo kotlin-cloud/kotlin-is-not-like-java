@@ -11,5 +11,4 @@ class MyActivity extends Activity {
            }
        );
    }
-
 }

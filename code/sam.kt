@@ -6,5 +6,4 @@ class MyActivity : Activity() {
            Log.d("TAG", "Item clicked!")
        }
    }
-
 }
