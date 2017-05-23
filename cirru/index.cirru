@@ -26,18 +26,12 @@ html
       .case (.name "String Templates") $ .pair
         .card (.lang Kotlin) $ pre.code $ code.kotlin (@insert ../code/string-template.kt)
         .card (.lang Java) $ pre.code $ code.java (@insert ../code/string-template.java)
-      .case (.name "String Templates") $ .pair
-        .card (.lang Kotlin) $ pre.code $ code.kotlin (@insert ../code/string-template.kt)
-        .card (.lang Java) $ pre.code $ code.java (@insert ../code/string-template.java)
       .case (.name "Get and Set") $ .pair
         .card (.lang Kotlin) $ pre.code $ code.kotlin (@insert ../code/get-set.kt)
         .card (.lang Java) $ pre.code $ code.java (@insert ../code/get-set.java)
       .case (.name "Data Class") $ .pair
         .card (.lang Kotlin) $ pre.code $ code.kotlin (@insert ../code/data-class.kt)
         .card (.lang Java) $ pre.code $ code.java (@insert ../code/data-class.java)
-      .case (.name "String Templates") $ .pair
-        .card (.lang Kotlin) $ pre.code $ code.kotlin (@insert ../code/string-template.kt)
-        .card (.lang Java) $ pre.code $ code.java (@insert ../code/string-template.java)
 
     .section
       .title "NULL SAFETY"

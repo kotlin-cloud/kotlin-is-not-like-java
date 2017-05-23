@@ -44,22 +44,6 @@ class ExampleClass {
    final String getExample() {
        return String.format("My name is %s %s",
            getName(), getSurname()); }
-}</code></pre></div></div></div><div class="case"><div class="name">String Templates</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
-   val name = "Omar"
-   val surname = "Miatello"
-   val example = "My name is $name $surname"
-}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyJavaClass {
-   final String getName() {
-       return "Omar";
-   }
-
-   final String getSurname() {
-       return "Miatello";
-   }
-
-   final String getExample() {
-       return String.format("My name is %s %s",
-           getName(), getSurname()); }
 }</code></pre></div></div></div><div class="case"><div class="name">Get and Set</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">fun renderItem(item: SomeItem) {
     visitCount.text = "${item.visitCount}次拜访"
 
@@ -101,22 +85,6 @@ class ExampleClass {
    public void setEmail(String email) {
        this.email = email;
    }
-}</code></pre></div></div></div><div class="case"><div class="name">String Templates</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
-   val name = "Omar"
-   val surname = "Miatello"
-   val example = "My name is $name $surname"
-}</code></pre></div><div class="card"><div class="lang">Java</div><pre class="code"><code class="java">class MyJavaClass {
-   final String getName() {
-       return "Omar";
-   }
-
-   final String getSurname() {
-       return "Miatello";
-   }
-
-   final String getExample() {
-       return String.format("My name is %s %s",
-           getName(), getSurname()); }
 }</code></pre></div></div></div></div><div class="section"><div class="title">NULL SAFETY</div><div class="case"><div class="name">Null Safety</div><div class="pair"><div class="card"><div class="lang">Kotlin</div><pre class="code"><code class="kotlin">class MyKotlinClass {
    var a: String = "ciao"
    var b: String = null  // Error at compile time

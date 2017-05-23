@@ -27,5 +27,14 @@
   "bugs": {
     "url": "https://github.com/kotlin-cloud/kotlin-is-not-like-java/issues"
   },
-  "homepage": "https://github.com/kotlin-cloud/kotlin-is-not-like-java"
+  "homepage": "https://github.com/kotlin-cloud/kotlin-is-not-like-java",
+  "faas": {
+    "domain": "kotlin",
+    "public": "./",
+    "description": "kotlin",
+    "author_name": "KevinOfNeu",
+    "author_email": "hongju.wang@ele.me",
+    "notice": ["hongju.wang@ele.me"],
+    "build": []
+  }
 }
